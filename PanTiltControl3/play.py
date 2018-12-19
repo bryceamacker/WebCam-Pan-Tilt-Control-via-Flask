@@ -29,6 +29,8 @@ except KeyboardInterrupt:
     GPIO.output(7, GPIO.HIGH)
     GPIO.cleanup()
 
- 0   45   90    135   180
-2.5   5   7.5   10    12.5
+pan.stop()
+tilt.stop()
+GPIO.output(7, GPIO.HIGH)
+GPIO.cleanup()
 
