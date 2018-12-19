@@ -51,6 +51,10 @@ def video_feed():
     return Response(gen(Camera()),
                     mimetype='multipart/x-mixed-replace; boundary=frame')
 
+@app.route("/forward/", methods=['POST'])
+def move_forward():
+	os.system("python3 play.py")
+	return render_template('index.html')
 
 
 @app.route('/', methods=['POST'])
@@ -58,15 +62,15 @@ def my_form_post():
 	global panServoAngle
 	global tiltServoAngle
 
-	panNewAngle = int(request.form['panServoAngle'])
-	if (panNewAngle != panServoAngle):
-		panServoAngle = panNewAngle
-		os.system("python3 angleServoCtrl.py " + str(panPin) + " " + str(panServoAngle))
+		panNewAngle = int(request.form['panServoAngle'])
+		if (panNewAngle != panServoAngle):
+			panServoAngle = panNewAngle
+			os.system("python3 angleServoCtrl.py " + str(panPin) + " " + str(panServoAngle))
 
-	tiltNewAngle = int(request.form['tiltServoAngle'])
-	if (tiltNewAngle != tiltServoAngle):
-		tiltServoAngle = tiltNewAngle
-		os.system("python3 angleServoCtrl.py " + str(tiltPin) + " " + str(tiltServoAngle))
+		tiltNewAngle = int(request.form['tiltServoAngle'])
+		if (tiltNewAngle != tiltServoAngle):
+			tiltServoAngle = tiltNewAngle
+			os.system("python3 angleServoCtrl.py " + str(tiltPin) + " " + str(tiltServoAngle))
 
 	templateData = {
       'panServoAngle'	: panServoAngle,
